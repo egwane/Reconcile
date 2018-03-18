@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                        http://www.springframework.org/schema/util    http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="contextApplicationContextProvider" class="com.egwane.context.ApplicationContextProvider"></bean>
+
+	<util:list id="usersInformation">
+		<bean class="com.egwane.finances.domain.UserInformation">
+			<property name="userName" value="Françoise" />
+			<property name="inputPath" value="C:\Users\Public\Documents\Documents partagés\Dépenses communes\Réconciliation\input\Françoise" />
+			<property name="archivesPath" value="C:\Users\Public\Documents\Documents partagés\Dépenses communes\Réconciliation\input\Françoise\archives" />
+			<property name="outputFile" value="C:\Users\Public\Documents\Documents partagés\Dépenses communes\Réconciliation\output\Transactions de Françoise.xls" />
+			<property name="amountColumn" value="2" />
+		</bean>
+		<bean class="com.egwane.finances.domain.UserInformation">
+			<property name="userName" value="Gwenael" />
+			<property name="inputPath" value="C:\Users\Public\Documents\Documents partagés\Dépenses communes\Réconciliation\input\Gwenael" />
+			<property name="archivesPath" value="C:\Users\Public\Documents\Documents partagés\Dépenses communes\Réconciliation\input\Gwenael\archives" />
+			<property name="outputFile" value="C:\Users\Public\Documents\Documents partagés\Dépenses communes\Réconciliation\output\Transactions de Gwenael.xls" />
+			<property name="amountColumn" value="1"/>
+		</bean>
+	</util:list>
+
+	<bean id="months" class="org.springframework.beans.factory.config.MapFactoryBean">
+		<property name="sourceMap">
+			<map>
+				<entry key="1" value="Janvier" />
+				<entry key="2" value="Février" />
+				<entry key="3" value="Mars" />
+				<entry key="4" value="Avril" />
+				<entry key="5" value="Mai" />
+				<entry key="6" value="Juin" />
+				<entry key="7" value="Juillet" />
+				<entry key="8" value="Août" />
+				<entry key="9" value="Septembre" />
+				<entry key="10" value="Octobre" />
+				<entry key="11" value="Novembre" />
+				<entry key="12" value="Décembre" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="headerLabels" class="org.springframework.beans.factory.config.SetFactoryBean">
+		<property name="sourceSet">
+			<set>
+				<value>Date</value>
+				<value>Gwénaël</value>
+				<value>Françoise</value>
+				<value>Bénéficiaire</value>
+				<value>Catégorie</value>
+				<value>Mémo</value>
+			</set>
+		</property>
+	</bean>
+
+	<bean id="ignoredTransactions" class="org.springframework.beans.factory.config.SetFactoryBean">
+		<property name="sourceSet">
+			<set>
+				<value>Ajustement</value>
+			</set>
+		</property>
+	</bean>
+
+	<bean id="categories" class="org.springframework.beans.factory.config.MapFactoryBean">
+		<property name="sourceMap">
+			<map>
+				<entry key="Assurance: Auto" value="Assurance: Auto" />
+				<entry key="Bébé" value="Théo" />
+				<entry key="Courrier" value="Courrier" />
+				<entry key="Electricité" value="Électricité" />
+				<entry key="Faire Part" value="" />
+				<entry key="Food: Grocery" value="Épicerie" />
+				<entry key="Food: Restaurant" value="Restaurant" />
+				<entry key="General Store" value="Magasins" />
+				<entry key="House" value="Maison" />
+				<entry key="Mimine" value="Mimine" />
+				<entry key="Phone / Internet" value="Téléphone / Internet" />
+				<entry key="Santé" value="Santé" />
+				<entry key="Taxes" value="Taxes" />
+				<entry key="Transportation: Gas" value="Essence" />
+				<!-- Françoise -->
+				<entry key="Alimentation" value="Épicerie" />
+				<entry key="Theo" value="Théo" />
+			</map>
+		</property>
+	</bean>	
+
+</beans>
