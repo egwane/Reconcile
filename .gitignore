@@ -1,0 +1,6 @@
+/bin/
+/target/classes/
+/target/test-classes/
+/target/surefire-reports/
+/target/maven-archiver/
+/logs/

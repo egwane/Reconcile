@@ -1,0 +1,17 @@
+Liens intéressants:
+-------------------
+
+AspectJ pour toString
+http://stackoverflow.com/questions/6807771/java-tostring-for-any-object
+
+TreeMap
+http://tutorialswithexamples.com/java-treemap-tutorial-and-examples/
+
+Filtrer et transformer une collection
+http://marxsoftware.blogspot.ca/2011/10/filtering-and-transforming-java.html
+
+JExcelAPI exemple de formats:
+http://www.docjar.com/html/api/jxl/demo/Write.java.html
+
+SL4J
+http://www.slf4j.org/migrator.html
