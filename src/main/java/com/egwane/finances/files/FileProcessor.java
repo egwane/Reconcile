@@ -98,7 +98,7 @@ public class FileProcessor {
 	WritableWorkbookBuilder.writableWorkbookBuilder().withFileName(userInformation.getOutputFile())
 		.withAmountColumn(userInformation.getAmountColumn()).withUserTransactions(userTransactions).build();
 
-	moveToArchive(filesToProcess, userInformation.getArchivesPath());
+	//moveToArchive(filesToProcess, userInformation.getArchivesPath());
 	logger.debug("End processInputDirectory() for " + userInformation.getUserName());
     }
 

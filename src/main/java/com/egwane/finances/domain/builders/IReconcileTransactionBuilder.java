@@ -5,19 +5,21 @@ import java.util.StringTokenizer;
 import org.apache.log4j.Logger;
 
 import com.egwane.finances.domain.IReconcileTransaction;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 
 public class IReconcileTransactionBuilder implements Builder<IReconcileTransaction> {
-    private static final Logger logger = Logger.getLogger(IReconcileTransactionBuilder.class);
+    private static final Logger logger          = Logger.getLogger(IReconcileTransactionBuilder.class);
 
-    private String payee;
-    private String date;
-    private String amount;
-    private String category;
-    private String memo;
-    private String checkNumber;
-    private int reconciled;
+    private String              payee;
+    private String              date;
+    private String              amount;
+    private String              category;
+    private String              memo;
+    private String              checkNumber;
+    private int                 reconciled;
 
-    private boolean malformedObject = false;
+    private boolean             malformedObject = false;
 
     /**
      * Empty constructor
@@ -26,54 +28,46 @@ public class IReconcileTransactionBuilder implements Builder<IReconcileTransacti
     }
 
     public static IReconcileTransactionBuilder iReconcileTransactionBuilder() {
-	return new IReconcileTransactionBuilder();
+        return new IReconcileTransactionBuilder();
     }
 
     public IReconcileTransactionBuilder withCSV(String csv) {
-	// logger.debug("Begin withCSV(), csv = " + csv);
+        logger.debug("Begin withCSV(), csv = " + csv);
 
-	StringTokenizer stringTokenizer = new StringTokenizer(csv, ",");
-	if (stringTokenizer.countTokens() != 7) {
-	    logger.error("Malformed line = " + csv);
-	    this.malformedObject = true;
-	    return this;
-	}
-	this.payee = extractNextToken(stringTokenizer);
-	this.date = extractNextToken(stringTokenizer);
-	this.amount = extractNextToken(stringTokenizer);
-	this.category = extractNextToken(stringTokenizer);
-	this.memo = extractNextToken(stringTokenizer);
-	this.checkNumber = extractNextToken(stringTokenizer);
-	this.reconciled = Integer.parseInt(extractNextToken(stringTokenizer));
+        Splitter splitter = Splitter.on(';').trimResults();
+        String[] tokens = Iterables.toArray(splitter.split(csv), String.class);
 
-	// logger.debug("End withCSV()");
-	return this;
-    }
+        if (tokens.length != 7) {
+            logger.error("Malformed line = " + csv + ", count = " + tokens.length);
+            this.malformedObject = true;
+            return this;
+        }
 
-    /**
-     * @param stringTokenizer
-     * @return
-     */
-    private String extractNextToken(StringTokenizer stringTokenizer) {
-	String nextToken = stringTokenizer.nextToken();
-	if (!nextToken.isEmpty())
-	    nextToken = nextToken.trim();
-	return nextToken;
+        this.payee = tokens[0];
+        this.date = tokens[1];
+        this.amount = tokens[2];
+        this.category = tokens[3];
+        this.memo = tokens[4];
+        this.checkNumber = tokens[5];
+        this.reconciled = Integer.parseInt(tokens[6]);
+
+        logger.debug("End withCSV()");
+        return this;
     }
 
     public IReconcileTransaction build() {
-	if (this.malformedObject)
-	    return null;
+        if (this.malformedObject)
+            return null;
 
-	IReconcileTransaction transaction = new IReconcileTransaction();
-	transaction.setPayee(payee);
-	transaction.setDate(date);
-	transaction.setAmount(amount);
-	transaction.setCategory(category);
-	transaction.setMemo(memo);
-	transaction.setCheckNumber(checkNumber);
-	transaction.setReconciled(reconciled);
+        IReconcileTransaction transaction = new IReconcileTransaction();
+        transaction.setPayee(payee);
+        transaction.setDate(date);
+        transaction.setAmount(amount);
+        transaction.setCategory(category);
+        transaction.setMemo(memo);
+        transaction.setCheckNumber(checkNumber);
+        transaction.setReconciled(reconciled);
 
-	return transaction;
+        return transaction;
     }
 }

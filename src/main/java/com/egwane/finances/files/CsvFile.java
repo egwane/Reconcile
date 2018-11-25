@@ -15,7 +15,7 @@ import com.egwane.finances.domain.builders.IReconcileTransactionBuilder;
 import com.external.tools.StopWatch;
 
 /**
- * @author Gwénaël
+ * @author Gwï¿½naï¿½l
  * 
  */
 public class CsvFile {
@@ -31,6 +31,7 @@ public class CsvFile {
      */
     public CsvFile(String file) {
 	this.file = file;
+	logger.info("In CsvFile. File: " + file);
     }
 
     /**

@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+bin
 
 # Packages #
 ############
@@ -22,7 +23,7 @@
 
 # Logs and databases #
 ######################
-*.log
+*.log*
 *.sql
 *.sqlite
 
@@ -35,3 +36,5 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+target
+.settings

@@ -9,7 +9,8 @@ public class TextFileScanner {
     private Scanner scanner;
 
     public TextFileScanner(String file) throws FileNotFoundException {
-	this.scanner = new Scanner(new File(file), "UTF-16");
+	// this.scanner = new Scanner(new File(file), "UTF-16");
+        this.scanner = new Scanner(new File(file), "Unicode");
 	scanner.useDelimiter(Pattern.compile(System.getProperty("line.separator")));
     }
 
